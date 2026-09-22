@@ -1,154 +1,456 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Интерактивное коммерческое предложение по бухгалтерскому и управленческому учёту для ИП и ООО.">
-    <title>Коммерческое предложение | Елена Ивашина</title>
-    <style>
-      :root { --ink:#1f2421; --green:#587469; --green-dark:#3a5047; --cream:#f4f7f5; --line:#e2e9e5; --muted:#66706a; }
-      * { box-sizing:border-box; }
-      html { scroll-behavior:smooth; }
-      body { margin:0; color:var(--ink); background:#fbfbfb; font-family:Inter,Arial,sans-serif; line-height:1.45; }
-      header { position:sticky; top:0; z-index:2; background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); }
-      .wrap { width:min(1120px,calc(100% - 32px)); margin:auto; }
-      .top { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
-      .brand { color:var(--ink); text-decoration:none; font-size:22px; font-weight:800; }
-      .brand small { display:block; margin-top:1px; color:var(--muted); font-size:10px; letter-spacing:.09em; text-transform:uppercase; }
-      .tabs { display:flex; padding:4px; gap:3px; border:1px solid var(--line); border-radius:15px; background:#f7f9f8; }
-      .tab, .button { appearance:none; border:0; cursor:pointer; border-radius:11px; font:inherit; font-weight:700; transition:.18s; }
-      .tab { padding:10px 14px; color:var(--muted); background:transparent; font-size:13px; }
-      .tab.active { color:#17201c; background:white; box-shadow:0 1px 5px rgba(0,0,0,.08); }
-      .button { padding:12px 16px; background:var(--green); color:#fff; font-size:13px; text-decoration:none; display:inline-block; }
-      .button:hover { background:var(--green-dark); }
-      .button.secondary { color:var(--green-dark); background:white; border:1px solid var(--green); }
-      main { padding:34px 0 54px; }
-      .hero, .card { background:#fff; border:1px solid var(--line); border-radius:24px; box-shadow:0 4px 20px rgba(27,38,33,.04); }
-      .hero { padding:42px; }
-      .eyebrow { display:inline-flex; align-items:center; gap:8px; margin-bottom:16px; padding:7px 11px; border:1px solid var(--line); border-radius:99px; color:#52675e; background:var(--cream); font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
-      .eyebrow::before { width:8px; height:8px; border-radius:50%; background:var(--green); content:""; }
-      h1 { max-width:740px; margin:0; font-size:clamp(31px,5vw,50px); letter-spacing:-.035em; line-height:1.08; }
-      .lead { max-width:720px; margin:17px 0 0; color:#53615b; font-size:18px; }
-      .meta { display:inline-block; margin-top:24px; padding:11px 13px; border-radius:12px; color:#52675e; background:#f8faf9; border:1px solid var(--line); font-size:13px; }
-      .meta strong { color:var(--ink); }
-      .card { margin-top:25px; overflow:hidden; }
-      .card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding:26px 30px; border-bottom:1px solid var(--line); }
-      h2 { margin:0; font-size:24px; letter-spacing:-.02em; }
-      .sub { margin:6px 0 0; color:var(--muted); font-size:14px; }
-      .count { flex:none; padding:7px 10px; border-radius:99px; background:var(--cream); color:var(--green-dark); font-size:12px; font-weight:800; }
-      .table-wrap { overflow-x:auto; }
-      table { width:100%; border-collapse:collapse; min-width:680px; }
-      th { padding:13px 30px; text-align:left; color:var(--muted); background:#fbfcfb; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
-      th:not(:first-child), td:not(:first-child) { text-align:right; }
-      td { padding:15px 30px; border-top:1px solid #edf1ef; vertical-align:middle; font-size:14px; }
-      td:first-child { font-weight:650; }
-      td small { display:block; margin-top:3px; color:var(--muted); font-weight:400; }
-      .qty { width:60px; padding:7px; color:var(--ink); border:1px solid #cfdad4; border-radius:8px; text-align:center; font:inherit; font-weight:700; }
-      .total { padding:22px 30px; display:flex; justify-content:flex-end; gap:28px; align-items:center; border-top:1px solid var(--line); background:#fbfcfb; }
-      .total span { color:var(--muted); font-size:14px; }
-      .total strong { font-size:23px; }
-      .notice { margin:0; padding:18px 30px 24px; color:var(--muted); font-size:12px; }
-      .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
-      .contact { padding:30px; }
-      .contact p { max-width:680px; color:#53615b; }
-      @media (max-width:720px) { .top { padding:12px 0; align-items:flex-start; } .brand { font-size:19px; } .tabs { margin-left:auto; } .tab { padding:9px; font-size:12px; } .hero { padding:28px 22px; } .card-head,.contact { padding:22px; } .card-head { display:block; } .count { display:inline-block; margin-top:14px; } th { padding:12px 16px; } td { padding:14px 16px; } .total { padding:20px 16px; gap:16px; } .notice { padding:16px; } }
-      @media print { @page { size:A4; margin:13mm; } body { background:#fff; font-size:11px; } header, .actions, .no-print { display:none !important; } main { padding:0; } .wrap { width:100%; } .hero,.card { border:1px solid #d7ddd9; box-shadow:none; border-radius:0; } .hero { padding:18px; } .card { margin-top:15px; } h1 { font-size:28px; } .lead { font-size:14px; } th,td { padding:8px 10px; } .notice { padding:10px; } }
-    </style>
-  </head>
-  <body>
-    <header class="no-print">
-      <div class="wrap top">
-        <a class="brand" href="https://ivashina62.ru/?utm_source=github&utm_medium=referral&utm_campaign=kp" target="_blank" rel="noopener">Ивашина <span>Елена</span><small>Бухгалтерский и управленческий учёт</small></a>
-        <div class="tabs" aria-label="Форма собственности">
-          <button class="tab active" type="button" data-type="ooo">Тариф для ООО</button>
-          <button class="tab" type="button" data-type="ip">Тариф для ИП</button>
-        </div>
-        <button class="button" id="printButton" type="button">Печать КП</button>
-      </div>
-    </header>
-
-    <main class="wrap">
-      <section class="hero">
-        <div class="eyebrow">Транспорт · Торговля · Стройка</div>
-        <h1>Бухгалтерский и управленческий учёт</h1>
-        <p class="lead">Навожу порядок в финансах бизнеса: показываю движение денег, прибыль и свободный остаток.</p>
-        <div class="meta">Форма учёта: <strong id="currentType">юридическое лицо (ООО)</strong></div>
-      </section>
-
-      <section class="card" id="specification">
-        <div class="card-head">
-          <div><h2 id="heading">Спецификация тарифа для ООО</h2><p class="sub">Состав работ можно согласовать после первичной диагностики.</p></div>
-          <div class="count" id="positionCount"></div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Работы</th><th>Стоимость</th><th>Количество</th><th>Итого</th></tr></thead>
-            <tbody id="serviceRows"></tbody>
-          </table>
-        </div>
-        <div class="total"><span>Ориентировочная стоимость в месяц</span><strong id="grandTotal">—</strong></div>
-        <p class="notice">Итог зависит от фактического объёма операций и согласуется до начала работ. Изменение количества в таблице нужно только для предварительной оценки.</p>
-      </section>
-
-      <section class="card contact">
-        <h2>Обсудим вашу задачу</h2>
-        <p>Напишите, какая у вас форма бизнеса, система налогообложения и что сейчас требует внимания. Сначала согласуем безопасный формат работы и объём первичной диагностики.</p>
-        <div class="actions no-print">
-          <a class="button" href="https://ivashina62.ru/?utm_source=github&utm_medium=referral&utm_campaign=kp#consultation">Получить консультацию</a>
-          <a class="button secondary" href="https://t.me/finansIvashina" target="_blank" rel="noopener">Написать в Telegram</a>
-        </div>
-      </section>
-    </main>
-
-    <script>
-      const tariffs = {
-        ooo: [
-          { name:'Ведение бухгалтерского и налогового учёта', note:'Закрытие периода и контроль расчётов', price:5000, qty:1 },
-          { name:'Банк, касса и платежи', note:'Работа с выпиской и контроль операций', price:504, qty:4 },
-          { name:'Подготовка отчётности', note:'В рамках согласованного состава', price:1200, qty:1 },
-          { name:'Сверка расчётов и контроль документов', note:'По согласованному графику', price:600, qty:1 },
-          { name:'Консультации и взаимодействие', note:'По текущим вопросам учёта', price:3600, qty:1 }
-        ],
-        ip: [
-          { name:'Ведение учёта ИП', note:'Закрытие периода и контроль обязательств', price:5000, qty:1 },
-          { name:'Банк и платежи', note:'Загрузка и проверка операций', price:504, qty:2 },
-          { name:'Расчёт налога и подготовка отчётности', note:'Для применяемой системы налогообложения', price:600, qty:1 },
-          { name:'Сверка с ЕНС', note:'Контроль расчётов с бюджетом', price:400, qty:1 },
-          { name:'Проверка документов для отчётности', note:'По согласованному объёму', price:126, qty:10 }
-        ]
-      };
-      let type = 'ooo';
-      let services = structuredClone(tariffs[type]);
-      const money = value => Math.round(value).toLocaleString('ru-RU') + ' ₽';
-      function render() {
-        const rows = document.getElementById('serviceRows');
-        rows.innerHTML = '';
-        let total = 0;
-        services.forEach((item, index) => {
-          const sum = item.price * item.qty;
-          total += sum;
-          const row = document.createElement('tr');
-          row.innerHTML = `<td>${item.name}<small>${item.note}</small></td><td>${money(item.price)}</td><td><input class="qty" type="number" min="0" value="${item.qty}" aria-label="Количество: ${item.name}" data-index="${index}"></td><td><strong>${money(sum)}</strong></td>`;
-          rows.appendChild(row);
-        });
-        document.getElementById('grandTotal').textContent = money(total);
-        document.getElementById('positionCount').textContent = services.length + ' позиций';
-        document.getElementById('heading').textContent = 'Спецификация тарифа для ' + (type === 'ooo' ? 'ООО' : 'ИП');
-        document.getElementById('currentType').textContent = type === 'ooo' ? 'юридическое лицо (ООО)' : 'индивидуальный предприниматель (ИП)';
-        document.querySelectorAll('.qty').forEach(input => input.addEventListener('input', event => {
-          const item = services[Number(event.target.dataset.index)];
-          item.qty = Math.max(0, Number(event.target.value) || 0);
-          render();
-        }));
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Коммерческое предложение — Ивашина Елена | ivashina62.ru</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f4f7f5',
+              100: '#e7ede9',
+              200: '#d0ddd5',
+              300: '#adc4b7',
+              400: '#84a595',
+              500: '#587469', /* Фирменный матовый оттенок ivashina62.ru */
+              600: '#486257',
+              700: '#3a5047',
+              800: '#30423b',
+              900: '#273630',
+              text: '#1f2421',
+              muted: '#636c67',
+              border: '#e6ebe8'
+            }
+          }
+        }
       }
-      document.querySelectorAll('[data-type]').forEach(button => button.addEventListener('click', () => {
-        type = button.dataset.type;
-        services = structuredClone(tariffs[type]);
-        document.querySelectorAll('[data-type]').forEach(tab => tab.classList.toggle('active', tab === button));
-        render();
-      }));
-      document.getElementById('printButton').addEventListener('click', () => window.print());
-      render();
-    </script>
-  </body>
+    }
+  </script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; font-size: 11px; padding: 0 !important; }
+      .shadow-soft { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+      header { position: static !important; border-bottom: 1px solid #ddd !important; }
+      #serviceModal { display: none !important; }
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    .shadow-soft {
+      box-shadow: 0 4px 20px -2px rgba(27, 38, 33, 0.04), 0 2px 6px -1px rgba(27, 38, 33, 0.02);
+    }
+  </style>
+</head>
+<body class="bg-[#fbfbfb] text-brand-text font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- Навигация в стиле ivashina62.ru -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-brand-border sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div>
+        <a href="https://ivashina62.ru" target="_blank" class="block group">
+          <div class="font-bold text-xl sm:text-2xl text-slate-800 tracking-tight flex items-baseline gap-2">
+            <span>Ивашина</span>
+            <span class="font-normal text-slate-600">Елена</span>
+          </div>
+          <div class="text-[10px] sm:text-xs tracking-wider text-slate-400 font-semibold uppercase mt-0.5">
+            Бухгалтерский & управленческий учет
+          </div>
+        </a>
+      </div>
+
+      <!-- Переключатель формы собственности -->
+      <div class="flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-brand-border">
+        <button id="tabBtnOOO" onclick="switchTariffType('ooo')" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-900 shadow-xs">
+          Тариф для ООО
+        </button>
+        <button id="tabBtnIP" onclick="switchTariffType('ip')" class="px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-500 hover:text-slate-900">
+          Тариф для ИП
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2.5 no-print">
+        <button onclick="triggerPrint()" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-brand-500 hover:bg-brand-600 active:scale-95 rounded-xl transition shadow-xs cursor-pointer" title="Распечатать или сохранить в PDF">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+          Печать КП
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Модальное окно добавления новой услуги (вместо prompt) -->
+  <div id="serviceModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 hidden no-print">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full mx-4 shadow-2xl border border-brand-border">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <span class="font-bold text-sm text-slate-800">Добавить услугу в спецификацию</span>
+        <button onclick="closeServiceModal()" class="text-slate-400 hover:text-slate-600 text-lg leading-none">✕</button>
+      </div>
+      <div class="mt-4 space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Наименование услуги:</label>
+          <input type="text" id="newServiceName" placeholder="Например: Сверка с фондами" class="w-full text-xs font-medium py-2 px-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Цена за ед. (₽):</label>
+            <input type="number" id="newServicePrice" value="500" min="0" class="w-full text-xs font-bold py-2 px-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Количество:</label>
+            <input type="number" id="newServiceQty" value="1" min="1" class="w-full text-xs font-bold py-2 px-3 rounded-xl border border-slate-200 focus:border-brand-500 outline-none">
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 flex gap-2">
+        <button onclick="closeServiceModal()" class="flex-1 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition">Отмена</button>
+        <button onclick="saveNewService()" class="flex-1 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-xs font-bold text-white transition">Добавить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Основное содержимое КП -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex-1 w-full space-y-8">
+
+    <!-- Заглавный блок как на сайте ivashina62.ru -->
+    <section class="bg-white rounded-3xl border border-brand-border p-7 sm:p-11 shadow-soft relative overflow-hidden">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f4f6f5] border border-brand-border text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-5">
+          <span class="w-2 h-2 rounded-full bg-brand-500"></span>
+          <span>Транспорт • Торговля • Стройка</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-[#1f2622] tracking-tight leading-tight">
+          Бухгалтерский и управленческий учет
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 font-normal mt-4 leading-relaxed">
+          Показываю, где теряются деньги, прибыль и свободный остаток. Навожу полный порядок в финансах вашего бизнеса.
+        </p>
+
+        <div class="mt-7 flex flex-wrap items-center gap-3.5">
+          <a href="#servicesTableSection" class="px-6 py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition shadow-xs inline-flex items-center gap-2">
+            <span>Спецификация тарифа</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="px-4 py-3 rounded-xl bg-slate-50 border border-brand-border text-xs text-slate-600 font-medium">
+            Форма учета: <strong id="currentTypeBadge" class="text-slate-900">Юридическое лицо (ООО)</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ТАБЛИЦА СПЕЦИФИКАЦИИ ТАРИФА (ЧИСТО ДЛЯ КЛИЕНТА, БЕЗ СКИДОК) -->
+    <section id="servicesTableSection" class="bg-white rounded-3xl border border-brand-border overflow-hidden shadow-soft scroll-mt-28">
+      <div class="p-6 sm:p-8 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight" id="specHeading">
+              Спецификация услуг по тарифной сетке (ООО)
+            </h2>
+            <span class="text-xs px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold border border-brand-200/70" id="specBadgeCount">
+              21 позиция
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">
+            Перечень плановых и переменных операций в соответствии с расчетными карточками обслуживания.
+          </p>
+        </div>
+
+
+        <div class="no-print flex items-center gap-2">
+          <button onclick="openServiceModal()" class="px-3.5 py-2 text-xs font-semibold rounded-xl border border-brand-300 bg-brand-50 hover:bg-brand-100 text-brand-800 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Добавить услугу
+          </button>
+          <button onclick="resetCurrentTariff()" class="px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition">
+            Сбросить к исходным
+          </button>
+        </div>
+      </div>
+
+      <!-- Таблица услуг -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+          <thead>
+            <tr class="bg-[#f8faf9] text-slate-400 uppercase text-[11px] font-bold tracking-wider border-b border-brand-border">
+              <th class="py-3.5 px-6">Наименование услуги</th>
+              <th class="py-3.5 px-4 text-right w-28">Цена за ед.</th>
+              <th class="py-3.5 px-4 text-center w-36">Количество</th>
+              <th class="py-3.5 px-6 text-right w-36">Всего</th>
+              <th class="py-3.5 px-4 text-center w-12 no-print"></th>
+            </tr>
+          </thead>
+          <tbody id="servicesListBody" class="divide-y divide-slate-100">
+            <!-- Заполняется JS -->
+          </tbody>
+          <tfoot>
+            <tr class="bg-brand-50/80 font-bold text-slate-900 border-t-2 border-brand-border">
+              <td class="py-5 px-6 text-sm uppercase tracking-wide text-brand-900">ИТОГО К ОПЛАТЕ В МЕСЯЦ:</td>
+              <td class="py-5 px-4 text-right text-slate-400">—</td>
+              <td class="py-5 px-4 text-center text-slate-600 font-semibold" id="tableSumOperations">0 операций</td>
+              <td class="py-5 px-6 text-right text-xl sm:text-2xl font-extrabold text-brand-700" id="tableSumPrice">0 ₽</td>
+              <td class="no-print"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Подвал -->
+  <footer class="bg-white border-t border-brand-border py-8 text-xs text-slate-500 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <p class="font-bold text-slate-800">Ивашина Елена</p>
+        <p class="text-slate-400 text-[11px] mt-0.5">Бухгалтерский и управленческий учет • <a href="https://ivashina62.ru" target="_blank" class="underline hover:text-brand-500 transition">ivashina62.ru</a></p>
+      </div>
+      <div class="text-slate-400 text-[11px]">
+        Коммерческое предложение по комплексному бухгалтерскому сопровождению
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // База услуг для ООО (исходная)
+    const servicesOOO = [
+      { id: 101, section: 'Обязательные', category: 'Банк, Касса и Платежи', name: 'Загрузка выписки в 1с (еженедельно)', price: 504, qty: 1 },
+      { id: 124, section: 'Обязательные', category: 'Банк, Касса и Платежи', name: 'Выгрузка 1 раз в месяц (1 расчетный счет)', price: 1500, qty: 1 },
+      { id: 102, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Закрытие периода, проверка счетов', price: 774, qty: 1 },
+      { id: 103, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Контроль лимитов для применения действующей СНО', price: 116, qty: 1 },
+      { id: 104, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Расчет УСН 15%', price: 200, qty: 1 },
+      { id: 105, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Сверка с ЕНС', price: 400, qty: 1 },
+      { id: 106, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Согласование с клиентом суммы налога по УСН', price: 200, qty: 1 },
+      { id: 107, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и проверка данных в КУДиР', price: 50, qty: 1 },
+      { id: 108, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и проверка декларации по УСН', price: 200, qty: 1 },
+      { id: 109, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и сдача Бух баланса и отчета о финансовых результатах', price: 200, qty: 1 },
+      { id: 110, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование пояснения к бухгалтерской отчетности', price: 300, qty: 1 },
+      { id: 111, section: 'Обязательные', category: 'Документооборот (Базовый)', name: 'Выгрузка ОСВ и запрос недостающих документов', price: 600, qty: 1 },
+      { id: 112, section: 'Обязательные', category: 'Документооборот (Базовый)', name: 'Закрытие месяца по документам для покупателей', price: 1200, qty: 1 },
+      { id: 113, section: 'Обязательные', category: 'Документооборот (Базовый)', name: 'Закрытие месяца по документам от поставщиков', price: 600, qty: 1 },
+      { id: 114, section: 'Обязательные', category: 'Документооборот (Базовый)', name: 'Сбор первичной документации и внесение в учетную систему', price: 900, qty: 1 },
+      { id: 115, section: 'Переменные', category: 'Банк, Касса и Платежи', name: 'Подготовка пп для оплаты контрагенту', price: 84, qty: 10 },
+      { id: 116, section: 'Переменные', category: 'Документооборот', name: 'Получение документов в ЭДО', price: 210, qty: 10 },
+      { id: 117, section: 'Переменные', category: 'Документооборот', name: 'Проверка документов для отчетности', price: 126, qty: 20 },
+      { id: 118, section: 'Переменные', category: 'Документооборот', name: 'Формирование исходящих документов (до 5 номенклатур)', price: 210, qty: 20 },
+      { id: 119, section: 'Переменные', category: 'Товарный учет и Склад', name: 'Внесение в учетную программу входящих документов (до 20 номенклатур)', price: 378, qty: 20 },
+      { id: 120, section: 'Переменные', category: 'Товарный учет и Склад', name: 'Внесение в учетную программу входящих документов (до 5 номенклатур)', price: 126, qty: 20 },
+      { id: 121, section: 'Непрогнозируемые', category: 'Взаимодействие с клиентом', name: 'Взаимодействие с бухгалтером', price: 3600, qty: 2 },
+      { id: 122, section: 'Прочие', category: 'Бух. обслуживание / Кадры', name: 'Формирование и отправка уведомления по УСН', price: 200, qty: 1 },
+      { id: 123, section: 'Прочие', category: 'Бух. обслуживание / Кадры', name: 'Внесение начислений руководителя в учетной программе', price: 600, qty: 1 }
+    ];
+
+    // База услуг для ИП (строго по новым скриншотам)
+    const servicesIP = [
+      { id: 201, section: 'Обязательные', category: 'Банк, Касса и Платежи', name: 'Загрузка выписки в 1с(еженедельно)', price: 504, qty: 1 },
+      { id: 228, section: 'Обязательные', category: 'Банк, Касса и Платежи', name: 'Выгрузка 1 раз в месяц (1 расчетный счет)', price: 1500, qty: 1 },
+      { id: 202, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Закрытие периода, проверка счетов.', price: 774, qty: 1 },
+      { id: 203, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Контроль лимитов для применения действующей СНО', price: 116, qty: 1 },
+      { id: 204, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Контроль лимитов для применения действующей СНО', price: 116, qty: 1 },
+      { id: 205, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Расчет 1% с выручки свыше 300тыс.', price: 35, qty: 1 },
+      { id: 206, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Расчет налога по УСН 6%', price: 600, qty: 1 },
+      { id: 207, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Расчет УСН 15%', price: 200, qty: 1 },
+      { id: 208, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Сверка с ЕНС.', price: 400, qty: 1 },
+      { id: 209, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Согласование с клиентом суммы налога по УСН', price: 200, qty: 1 },
+      { id: 210, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Согласование с клиентом суммы налога по УСН', price: 200, qty: 1 },
+      { id: 211, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и проверка данных в КУДиР', price: 50, qty: 1 },
+      { id: 212, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и проверка данных в КУДиР', price: 50, qty: 1 },
+      { id: 213, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и проверка декларации по УСН', price: 200, qty: 1 },
+      { id: 214, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и сдача Бух баланса и отчета о финансовых результатах', price: 200, qty: 1 },
+
+      { id: 215, section: 'Обязательные', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование пояснения к бухгалтерской отчетности', price: 300, qty: 1 },
+      { id: 216, section: 'Обязательные', category: 'Документооборот', name: 'Выгрузка ОСВ и запрос недостающих документов', price: 600, qty: 1 },
+      { id: 217, section: 'Обязательные', category: 'НДС и Отчетность', name: 'Расчет НДС.', price: 1200, qty: 1 },
+      { id: 218, section: 'Обязательные', category: 'НДС и Отчетность', name: 'Формирование и проверка отраженных данных в декларации НДС', price: 295, qty: 2 },
+      { id: 219, section: 'Обязательные', category: 'НДС и Отчетность', name: 'Формирование книги покупок', price: 100, qty: 1 },
+      { id: 220, section: 'Обязательные', category: 'НДС и Отчетность', name: 'Формирование книги продаж', price: 99, qty: 1 },
+      { id: 221, section: 'Обязательные', category: 'Основные средства/НМА', name: 'Контроль правильности начисления амортизации', price: 900, qty: 1 },
+      { id: 222, section: 'Переменные', category: 'Банк, Касса и Платежи', name: 'Подготовка пп для оплаты контрагенту', price: 84, qty: 10 },
+      { id: 223, section: 'Переменные', category: 'Банк, Касса и Платежи', name: 'Проверка разнесения выгруженных п/п', price: 42, qty: 15 },
+      { id: 224, section: 'Переменные', category: 'Документооборот', name: 'Проверка документов для отчетности', price: 126, qty: 20 },
+      { id: 225, section: 'Переменные', category: 'Товарный учет и Склад', name: 'Внесение в учетную программу входящих документов (до 5 номенклатур)', price: 126, qty: 20 },
+      { id: 226, section: 'Прочие', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и отправка уведомления по УСН', price: 200, qty: 1 },
+      { id: 227, section: 'Прочие', category: 'Бухгалтерское обслуживание и СНО (ОСНО/УСН)', name: 'Формирование и отправка уведомления по УСН', price: 200, qty: 1 }
+    ];
+
+    let currentTariff = 'ooo';
+    let currentData = JSON.parse(JSON.stringify(servicesOOO));
+
+    function formatMoney(amount) {
+      return Math.round(amount).toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('servicesListBody');
+      tbody.innerHTML = '';
+
+      let grandTotal = 0;
+      let totalOps = 0;
+      let prevHeader = '';
+
+      currentData.forEach((item) => {
+        const itemSum = item.price * item.qty;
+        grandTotal += itemSum;
+        totalOps += item.qty;
+
+        const groupKey = `${item.section || ''} — ${item.category}`;
+        if (groupKey !== prevHeader) {
+          prevHeader = groupKey;
+          const catRow = document.createElement('tr');
+          catRow.className = 'bg-[#fbfcfb]';
+          catRow.innerHTML = `
+            <td colspan="5" class="py-2.5 px-6 font-bold text-xs uppercase tracking-wider text-brand-700 bg-brand-50/50">
+              ${prevHeader}
+            </td>
+          `;
+          tbody.appendChild(catRow);
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50/80 transition-colors';
+        tr.innerHTML = `
+          <td class="py-3 px-6 text-slate-800 font-medium">${item.name}</td>
+          <td class="py-3 px-4 text-right text-slate-500 font-medium">${formatMoney(item.price)}</td>
+          <td class="py-3 px-4 text-center">
+            <div class="inline-flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white shadow-xs">
+              <button onclick="modifyQty(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-400 hover:bg-slate-100 font-bold transition">−</button>
+              <input type="number" min="0" value="${item.qty}" onchange="setQty(${item.id}, this.value)" class="w-12 text-center font-bold text-slate-800 text-xs py-1 border-x border-slate-200 outline-none bg-transparent">
+              <button onclick="modifyQty(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center text-slate-400 hover:bg-slate-100 font-bold transition">+</button>
+            </div>
+          </td>
+          <td class="py-3 px-6 text-right font-bold text-slate-900">${formatMoney(itemSum)}</td>
+          <td class="py-3 px-4 text-center no-print">
+            <button onclick="deleteItem(${item.id})" title="Исключить услугу" class="text-slate-300 hover:text-red-500 transition p-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('tableSumPrice').innerText = formatMoney(grandTotal);
+      document.getElementById('tableSumOperations').innerText = totalOps + ' операций';
+      document.getElementById('specBadgeCount').innerText = currentData.length + ' позиций';
+
+      // Авто-синхронизация со служебным калькулятором сотрудника
+    }
+
+    function switchTariffType(type) {
+      currentTariff = type;
+      const btnOOO = document.getElementById('tabBtnOOO');
+      const btnIP = document.getElementById('tabBtnIP');
+      const heading = document.getElementById('specHeading');
+      const badge = document.getElementById('currentTypeBadge');
+
+      if (type === 'ooo') {
+        btnOOO.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-900 shadow-xs';
+        btnIP.className = 'px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-500 hover:text-slate-900';
+        currentData = JSON.parse(JSON.stringify(servicesOOO));
+        heading.innerText = 'Спецификация услуг по тарифной сетке (ООО)';
+        badge.innerText = 'Юридическое лицо (ООО)';
+      } else {
+        btnIP.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all bg-white text-slate-900 shadow-xs';
+        btnOOO.className = 'px-4 py-2 rounded-xl text-xs font-semibold transition-all text-slate-500 hover:text-slate-900';
+        currentData = JSON.parse(JSON.stringify(servicesIP));
+        heading.innerText = 'Спецификация услуг по тарифной сетке (ИП)';
+        badge.innerText = 'Индивидуальный предприниматель (ИП)';
+
+      }
+
+      renderTable();
+    }
+
+    function resetCurrentTariff() {
+      if (currentTariff === 'ooo') {
+        currentData = JSON.parse(JSON.stringify(servicesOOO));
+      } else {
+        currentData = JSON.parse(JSON.stringify(servicesIP));
+      }
+      renderTable();
+    }
+
+    function modifyQty(id, delta) {
+      const found = currentData.find(s => s.id === id);
+      if (found) {
+        found.qty = Math.max(0, found.qty + delta);
+        renderTable();
+      }
+    }
+
+    function setQty(id, value) {
+      const found = currentData.find(s => s.id === id);
+      if (found) {
+        const parsed = parseInt(value, 10);
+        found.qty = isNaN(parsed) || parsed < 0 ? 0 : parsed;
+        renderTable();
+      }
+    }
+
+    function deleteItem(id) {
+      currentData = currentData.filter(s => s.id !== id);
+      renderTable();
+    }
+
+    function openServiceModal() {
+      document.getElementById('newServiceName').value = '';
+      document.getElementById('newServicePrice').value = '500';
+      document.getElementById('newServiceQty').value = '1';
+      document.getElementById('serviceModal').classList.remove('hidden');
+
+      document.getElementById('newServiceName').focus();
+    }
+
+    function closeServiceModal() {
+      document.getElementById('serviceModal').classList.add('hidden');
+    }
+
+    function saveNewService() {
+      const name = document.getElementById('newServiceName').value.trim();
+      if (!name) return;
+      const price = parseFloat(document.getElementById('newServicePrice').value) || 0;
+      const qty = parseInt(document.getElementById('newServiceQty').value, 10) || 1;
+
+      currentData.push({
+        id: Date.now(),
+        section: 'Индивидуальные',
+        category: 'Дополнительные услуги',
+        name: name,
+        price: price,
+        qty: qty
+      });
+      closeServiceModal();
+      renderTable();
+    }
+
+    function triggerPrint() {
+      // Прямой надежный вызов системного диалога печати
+      window.focus();
+      setTimeout(() => {
+        window.print();
+      }, 50);
+    }
+
+    window.onload = function() {
+      renderTable();
+    };
+  </script>
+</body>
 </html>
